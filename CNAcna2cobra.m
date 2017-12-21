@@ -1,4 +1,3 @@
-
 function cbmodel= CNAcna2cobra(cnap)
 % CellNetAnalyzer API function 'CNAcna2cobra'
 %
