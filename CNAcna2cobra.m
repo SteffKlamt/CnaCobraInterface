@@ -1,4 +1,4 @@
- 
+
 function cbmodel= CNAcna2cobra(cnap)
 % CellNetAnalyzer API function 'CNAcna2cobra'
 %
@@ -17,14 +17,13 @@ cnap2= CNAgetMFNetwork(cnap);
 cbmodel = struct();
 cbmodel.description = 'COBRA model converted from a CNA project';
 cbmodel.rxns = cellstr(cnap2.reacID);
-cbmodel.mets = cellstr(cnap2.specID); 
+cbmodel.mets = cellstr(cnap2.specID);
 cbmodel.S =  cnap2.stoichMat;
 cbmodel.lb =  cnap2.reacMin;
-cbmodel.ub =  cnap2.reacMax; 
-cbmodel.rev = double(cnap2.reacMin<0); % Reversibility vector            
-cbmodel.c =   -cnap2.objFunc; % Objective coefficients; CNA minimizes COBRA maximizes!       
+cbmodel.ub =  cnap2.reacMax;
+cbmodel.c =   -cnap2.objFunc; % Objective coefficients; CNA minimizes COBRA maximizes!
 cbmodel.rxnNames = cellstr(cnap2.reacID);
-cbmodel.metNames = cellstr(cnap2.specLongName); 
+cbmodel.metNames = cellstr(cnap2.specLongName);
 
 % optional fields of COBRA model
 %  cbmodel.subSystems =      'Subsystem name for each reaction (opt)  ';
@@ -48,11 +47,6 @@ cbmodel.S =  sparse(cbmodel.S);
 cbmodel.mets(indices,:)=[];
 cbmodel.metNames(indices,:)=[];
 cbmodel.b=zeros(size(cbmodel.S,1),1);
-
-% reversible if lower bound < 0
-for n = 1:numel(cbmodel.lb)
-  cbmodel.rev(n) = cbmodel.lb(n)<0;
-end
 
 
 
