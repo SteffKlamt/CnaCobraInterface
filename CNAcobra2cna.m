@@ -19,7 +19,7 @@ cnap.stoichMat = full(cbmodel.S);
 cnap.reacMin = cbmodel.lb;
 cnap.reacMax = cbmodel.ub;
 cnap.reacID = [char(cbmodel.rxns{:})];
-cnap.objFunc = -cbmodel.c; %%CNA minimizes!
+cnap.objFunc = cbmodel.osense * cbmodel.c;
 
 for i=1:size(cnap.specLongName,2)
 	zw=deblank(cnap.specLongName(i,:));
