@@ -19,7 +19,19 @@ cnap.stoichMat = full(cbmodel.S);
 cnap.reacMin = cbmodel.lb;
 cnap.reacMax = cbmodel.ub;
 cnap.reacID = [char(cbmodel.rxns{:})];
-cnap.objFunc = cbmodel.osense * cbmodel.c;
+%If osenseSr is defined use it. 
+if isfield(cbmodel,'osenseStr')
+    if strcmp(cbmodel.osenseStr,'min')
+        osensecoef = 1;
+    else
+        osensecoef = -1;        
+    end
+elseif isfield(cbmodel,'osense') %if not, look for osense
+    osensecoef = cbmodel.osense;
+else %if neither is present assume maxmiisation
+    osensecoef = -1;
+end
+cnap.objFunc = osensecoef * cbmodel.c;
 
 for i=1:size(cnap.specLongName,2)
 	zw=deblank(cnap.specLongName(i,:));

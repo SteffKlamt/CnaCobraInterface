@@ -22,6 +22,7 @@ cbmodel.lb =  cnap2.reacMin;
 cbmodel.ub =  cnap2.reacMax;
 cbmodel.c =   cnap2.objFunc; 
 cbmodel.osense = 1;% CNA minimizes!
+cbmodel.osenseStr = 'min'; %Set both fields
 cbmodel.rxnNames = cellstr(cnap2.reacID);
 cbmodel.metNames = cellstr(cnap2.specLongName);
 
